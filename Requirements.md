@@ -2,6 +2,8 @@
 
 ## 1. Each user has account and can be authenticated/logged in.
 ### Use Cases
+- Sign in: Log into an existing account. MongoDB database is checked for the login. If username & pw matches some username & pw combination in MongoDB, "log in" and allow access to bidding on auctions. 
+- Sign up: Enter new account details. Account added to MongoDB database. "Log in" and allow access to bidding on auctions. 
 ### Use Case Descriptions and Diagrams
 
 ## 2. All users can add an auction item: include a description, title, and date/time the auction should end.
