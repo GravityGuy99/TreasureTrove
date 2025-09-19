@@ -28,8 +28,11 @@
 ![alt text](https://github.com/zoesadowski/CPS490_ebay_app/blob/main/diagrams/Filter.jpg)
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
+- View Auction: Pulls up page of respective auction.
 ### Use Case Descriptions and Diagrams
 
 ## 5. After selecting an active auction, the user should be sent to a page with the title and description of the item, a real-time countdown to the end of the auction, the ability to bid with tokens, and a real-time bid history.
 ### Use Cases
+- Bid on Auction: Pulls up menu for user to place bids. Must be more than highest bid.
+- View bid history: Shows history of bids, featuring user and amount bidded.
 ### Use Case Descriptions and Diagrams
