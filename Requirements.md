@@ -3,8 +3,11 @@
 ## 1. Each user has account and can be authenticated/logged in.
 ### Use Cases
 - Sign in: Log into an existing account. MongoDB database is checked for the login. If username & pw matches some username & pw combination in MongoDB, "log in" and allow access to bidding on auctions. 
-- Sign up: Enter new account details. Account added to MongoDB database. "Log in" and allow access to bidding on auctions. 
+- Sign up: Enter new account details (username, email, password, confirm password). Account added to MongoDB database. "Log in" and allow access to bidding on auctions. 
+
 ### Use Case Descriptions and Diagrams
+![UML sequence Diagram showing the flow of the sign in use case](./diagrams/sign_in_uml.png)
+![UML Sequence Diagram showing the flow of the Sign up use case](./diagrams/create_account_uml.png)
 
 ## 2. All users can add an auction item: include a description, title, and date/time the auction should end.
 ### Use Cases
