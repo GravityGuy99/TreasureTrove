@@ -21,6 +21,10 @@
 - On the main page, all items will be displayed in a column based on order added.
 - There will be an option to filter items based on specific criteria input by the user so that the user can find specific items of interest.
 ### Use Case Descriptions and Diagrams
+- The user intputs their desired item into a search bar
+- This query will access the databse containing all items currently for auction
+- From here it will begine to check each specific item to see if its name or description contain the keyword
+- All items that contain said keyword will be displayed
 ![alt text](https://github.com/zoesadowski/CPS490_ebay_app/blob/main/diagrams/Filter.jpg)
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
