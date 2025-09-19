@@ -16,6 +16,7 @@
 
 ## 3. All users should be able to see all active auctions.
 ### Use Cases
+- On the main page, all items will be displayed in a column based on order added. There will be an option to filter items based on specific criteria input by the user so that the user can find specific items of interest.
 ### Use Case Descriptions and Diagrams
 
 ## 4. All users should be able to click on an active auction.
