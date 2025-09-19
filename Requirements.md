@@ -6,8 +6,7 @@
 - Sign up: Enter new account details (username, email, password, confirm password). Account added to MongoDB database. "Log in" and allow access to bidding on auctions. 
 
 ### Use Case Descriptions and Diagrams
-![UML sequence Diagram showing the flow of the sign in use case](./diagrams/sign_in_uml.png)
-![UML Sequence Diagram showing the flow of the Sign up use case](./diagrams/create_account_uml.png)
+![UML sequence Diagram showing the flow of the use cases](./diagrams/log_in_uml.png)
 
 ## 2. All users can add an auction item: include a description, title, and date/time the auction should end.
 ### Use Cases
