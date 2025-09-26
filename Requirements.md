@@ -9,6 +9,9 @@
 - Forgot password: Reset password. User must provide their username and answer their security question (retrieved from the MongoDB database) successfully to be able to create a new password. If the user fails to answer their security question, they will not be able to reset their password. 
 ![UML Sequence Diagram showing the flow of resetting password](./diagrams/forgot_password.png)
 
+## Activity Diagram
+![Activity Diagram showing the flow of the logging in, creating account, and resetting password](./diagrams/logon_activity_diagram.png)
+
 ## 2. All users can add an auction item: include a description, title, and date/time the auction should end.
 ### Use Cases
 - List Item: Small form pops up on user click, allowing for addition of relevent photos, and details
