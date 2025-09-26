@@ -19,6 +19,7 @@
 - Title: Text that will be dsiaplyed larger beneath the pictures, and the name that will appear on other pages
 - Date/Time: Date and Time of the end of the auction. Date selected first, then option for time of day. Will be represented by a countdown on each item page. Countdown will be based on the EST timezone where the server is located.
 ### Use Case Descriptions and Diagrams
+![Activity Diagram showing the item listing process](./diagrams/item_listing_diagram.png)
 
 ## 3. All users should be able to see all active auctions.
 ### Use Cases
