@@ -31,10 +31,12 @@
 - From here it will begine to check each specific item to see if its name or description contain the keyword
 - All items that contain said keyword will be displayed
 ![alt text](https://github.com/zoesadowski/CPS490_ebay_app/blob/main/diagrams/Filter.jpg)
+
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
-- View Auction: Pulls up page of respective auction.
-### Use Case Descriptions and Diagrams
+- View Auction: Pulls up page of respective auction. Gets the information about the listing from a MongoDB database. 
+![UML Sequence Diagram showing the flow for viewing an item listing](./diagrams/view_item_listing.png)
+![Data flow diagram for viewing an item listing](./diagrams/view_listing_dataflow.png)
 
 ## 5. After selecting an active auction, the user should be sent to a page with the title and description of the item, a real-time countdown to the end of the auction, the ability to bid with tokens, and a real-time bid history.
 ### Use Cases
