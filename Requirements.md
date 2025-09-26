@@ -45,4 +45,4 @@
 - View bid history: Shows history of bids, featuring user and amount bidded.
 ### Use Case Descriptions and Diagrams
 ![Sequence Diagram showing the bidding process](./diagrams/bidding_sequence_diagram.png)
-![Activity Diagram showing the flow of bidding in auctions](./diagrams/bidding_diagram.jpg)
+![Activity Diagram showing the flow of bidding in auctions](./diagrams/Bidding_Diagram.png)
