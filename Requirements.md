@@ -30,7 +30,8 @@
 - This query will access the databse containing all items currently for auction
 - From here it will begine to check each specific item to see if its name or description contain the keyword
 - All items that contain said keyword will be displayed
-![alt text](https://github.com/zoesadowski/CPS490_ebay_app/blob/main/diagrams/ItemDisplayDiagram.jpg)
+![Activity Diagram showing the flow of viewing active auctions](./diagrams/ItemDisplayDiagram.jpg)
+
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
 - View Auction: Pulls up page of respective auction. Gets the information about the listing from a MongoDB database. 
