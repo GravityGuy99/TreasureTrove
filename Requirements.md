@@ -16,7 +16,7 @@
 ### Use Cases
 - List Item: Small form pops up on user click, allowing for addition of relevent photos, and details
 - Description: Description of the item located underneath the pictures, letting buyers see what the item is
-- Title: Text that will be dsiaplyed larger beneath the pictures, and the name that will appear on other pages
+- Title: Text that will be displayed larger beneath the pictures, and the name that will appear on other pages
 - Date/Time: Date and Time of the end of the auction. Date selected first, then option for time of day. Will be represented by a countdown on each item page. Countdown will be based on the EST timezone where the server is located.
 ### Use Case Descriptions and Diagrams
 ![Activity Diagram showing the item listing process](./diagrams/item_listing_diagram.png)
