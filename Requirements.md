@@ -31,8 +31,8 @@
 - This query will access the databse containing all items currently for auction
 - From here it will begine to check each specific item to see if its name or description contain the keyword
 - All items that contain said keyword will be displayed
-![Sequence Diagram showing the exchange of information in the viewing of items process](./diagrams/SequencePart3.png)
-![Activity Diagram showing the flow of viewing active auctions](./diagrams/ItemDisplayDiagram.jpg)
+![Sequence Diagram showing the exchange of information in the viewing of items process](./diagrams/item_display_sequence_diagram.png)
+![Activity Diagram showing the flow of viewing active auctions](./diagrams/item_display_action_diagram.png)
 
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
