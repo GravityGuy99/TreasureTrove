@@ -45,5 +45,5 @@
 - Bid on Auction: Pulls up menu for user to place bids. Must be more than highest bid.
 - View bid history: Shows history of bids, featuring user and amount bidded.
 ### Use Case Descriptions and Diagrams
-![Sequence Diagram showing the bidding process](./diagrams/bidding_sequence_diagram.png)
+![Sequence Diagram showing the bidding process](./diagrams/Bidding_Sequence_Diagram.png)
 ![Activity Diagram showing the flow of bidding in auctions](./diagrams/Bidding_Diagram.png)
