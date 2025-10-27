@@ -12,7 +12,7 @@ export function Header() {
                 background: '#3C78D8',
                 padding: '15px 30px',
                 textAlign: 'left',
-                color: '#3C78D8'
+                color: 'white'
             }}>
                  <span>Logged in as <User id ={sub} /></span>
                 <br />
