@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { signup } from "../api/users.js";
+import { Header } from '../components/Header.jsx'
 
 export function Signup() {
     const [username, setUsername] = useState('')
@@ -20,8 +21,9 @@ export function Signup() {
     }
 
     return (
+        
         <form onSubmit={handleSubmit}>
-            <Link to='/'>Back to main page</Link>
+            <Header />
             <hr />
             <br />
             <div>
