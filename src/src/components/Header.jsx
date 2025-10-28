@@ -8,8 +8,13 @@ export function Header() {
     if (token) {
         const {sub} = jwtDecode(token)
         return (
-            <div>
-                Logged in as <User id ={sub} />
+            <div style={{
+                background: '#3C78D8',
+                padding: '15px 30px',
+                textAlign: 'left',
+                color: 'white'
+            }}>
+                 <span>Logged in as <User id ={sub} /></span>
                 <br />
                 <button onClick={() => setToken(null)}>Logout</button>
             </div>
@@ -17,8 +22,15 @@ export function Header() {
     }
 
     return (
-        <div>
-            <Link to='/login'>Login</Link> | <Link to='/signup'>Signup</Link>
+        <div style={{
+            background: '#3C78D8',
+            padding: '15px 30px',
+            textAlign: 'left',
+            display: 'flex',
+            justifyContent: 'space-between',
+            color: '#3C78D8'
+        }}>
+            <Link to='/'>Home Page</Link> | <div style={{ textAlign:'right'}}><Link to='/login'>Login</Link> | <Link to='/signup'>Signup</Link></div>
         </div>
     )
 }
