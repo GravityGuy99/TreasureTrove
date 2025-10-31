@@ -14,7 +14,7 @@ export function Header() {
                 textAlign: 'left',
                 color: 'white'
             }}>
-                 <span>Logged in as <User id ={sub} /></span>
+                 Logged in as <User id ={sub} />| <div style={{ textAlign:'right'}}><Link to='/user'>Profile</Link></div>
                 <br />
                 <button onClick={() => setToken(null)}>Logout</button>
             </div>

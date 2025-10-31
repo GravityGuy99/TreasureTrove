@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: '/user/:id',
+        path: '/user',
         element: <UserPage />,
     },
     //I added the special page

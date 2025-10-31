@@ -5,9 +5,13 @@ import { getPosts } from '../api/posts.js'
 import { useState } from 'react'
 import { Header } from '../components/Header.jsx'
 import { User } from "../components/User.jsx";
+import jwt_decode from 'jwt-decode'
+import { useAuth } from '../contexts/AuthContext.jsx'
+const payload = jwt_decode(useAuth())
+const userId = payload.sub
 
 export function UserPage() {
-  const [user] = User()
+  const [user] = User(userId)
   const [sortBy] = useState('createdAt')
   const postsQuery = useQuery({
     queryKey: ['posts', {user, sortBy}],
