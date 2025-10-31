@@ -4,8 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
-import { UserPage } from './pages/UserPage.jsx'
+import { ProfileRedirect } from './pages/ProfileRedirect.jsx'
 import { SpecialPage } from './pages/SpecialPage.jsx'
+import { UserPage } from './pages/UserPage.jsx'
 
 const router = createBrowserRouter([
     {
@@ -22,9 +23,12 @@ const router = createBrowserRouter([
     },
     {
         path: '/user',
+        element: <ProfileRedirect />,
+    },
+    {
+        path: '/user/:userId',
         element: <UserPage />,
     },
-    //I added the special page
     {
         path: '/specialpage',
         element: <SpecialPage />,
