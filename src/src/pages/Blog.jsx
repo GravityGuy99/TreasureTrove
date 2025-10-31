@@ -6,9 +6,8 @@ import { LoginCheck } from '../components/LoginCheck.jsx'
 export function Blog() {
 
   return (
-    <div style={{padding: 8}}>
+    <div style={{padding: 0}}>
       <Header />
-      <br />
       <hr />
       <br />
       <LoginCheck />

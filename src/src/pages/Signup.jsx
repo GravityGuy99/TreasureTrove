@@ -26,32 +26,32 @@ export function Signup() {
             <Header />
             <hr />
             <br />
-            <div>
-                <label htmlFor="create-username"> Username: </label>
-                <input
-                    type="text"
-                    name='create-username'
-                    id='create-username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                <div className="user-input">
+                    <label htmlFor="create-username"> Username: </label>
+                    <input
+                        type="text"
+                        name='create-username'
+                        id='create-username'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div className="user-input">
+                    <label htmlFor="create-password"> Password: </label>
+                    <input
+                        type="password"
+                        name='create-password'
+                        id='create-password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <br />
+                <input  
+                    type='submit'
+                    value={signupMutation.isPending ? 'Signing up...' : 'Sign Up'}
+                    disabled={!username || !password || signupMutation.isPending}
                 />
-            </div>
-            <div>
-                <label htmlFor="create-password"> Password: </label>
-                <input
-                    type="password"
-                    name='create-password'
-                    id='create-password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <br />
-            <input  
-                type='submit'
-                value={signupMutation.isPending ? 'Signing up...' : 'Sign Up'}
-                disabled={!username || !password || signupMutation.isPending}
-            />
         </form>
     )
 }

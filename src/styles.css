@@ -1,0 +1,12 @@
+body, hr{
+    margin: 0px;
+}
+p, .non-header-link{
+margin: 8px;
+}
+form{
+    text-align: center;
+}
+.user-input{
+    margin-bottom: 10px;
+}

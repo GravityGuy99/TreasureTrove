@@ -11,7 +11,7 @@ export function SpecialPage() {
       <br />
       <hr />
       <br />
-      You are in the special page! Yay!
+      <p>You are in the special page! Yay!</p>
     </div>
   )
 }
