@@ -30,34 +30,32 @@ export function Login() {
             <Header />
             <hr />
             <br />
-            <div>
-                <div className="user-input">
-                    <label htmlFor="create-username"> Username: </label>
-                    <input
-                        type="text"
-                        name='create-username'
-                        id='create-username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className="user-input">
-                    <label htmlFor="create-password"> Password: </label>
-                    <input
-                        type="password"
-                        name='create-password'
-                        id='create-password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <br />
-                <input  
-                    type='submit'
-                    value={loginMutation.isPending ? 'Logging in...' : 'Login'}
-                    disabled={!username || !password || loginMutation.isPending}
+            <div className="user-input">
+                <label htmlFor="create-username"> Username: </label>
+                <input
+                    type="text"
+                    name='create-username'
+                    id='create-username'
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
+            <div className="user-input">
+                <label htmlFor="create-password"> Password: </label>
+                <input
+                    type="password"
+                    name='create-password'
+                    id='create-password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            <br />
+            <input  
+                type='submit'
+                value={loginMutation.isPending ? 'Logging in...' : 'Login'}
+                disabled={!username || !password || loginMutation.isPending}
+            />
         </form>
     )
 }

@@ -6,8 +6,9 @@ export function SpecialPage() {
   //also announces you are in the special page
   //this page is very simple
   return (
-    <div style={{padding: 8}}>
-      <Link to='/'>Back to main page</Link> 
+    <div>
+      <br />
+      <Link to='/'><p>Back to main page</p></Link> 
       <br />
       <hr />
       <br />

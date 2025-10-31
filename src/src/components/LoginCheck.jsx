@@ -14,8 +14,8 @@ export function LoginCheck() {
     return( 
         //tells the user that they can now go to the special page
         //includes a link to said page
-        <div id="non-header-link">
-            <Link to='/specialpage'>You can now go to the special page!</Link>
+        <div>
+            <Link to='/specialpage'><p>You can now go to the special page!</p></Link>
             <hr />
         </div>
 
