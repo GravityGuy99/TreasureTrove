@@ -31,6 +31,8 @@ export function Login() {
             <hr />
             <br />
             <div className="user-input">
+            <h2>Login</h2>
+            <div>
                 <label htmlFor="create-username"> Username: </label>
                 <input
                     type="text"

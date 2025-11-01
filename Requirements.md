@@ -19,8 +19,7 @@
 - Title: Text that will be displayed larger beneath the pictures, and the name that will appear on other pages
 - Date/Time: Date and Time of the end of the auction. Date selected first, then option for time of day. Will be represented by a countdown on each item page. Countdown will be based on the EST timezone where the server is located.
 ### Use Case Descriptions and Diagrams
-![Sequence Diagram showing the exchange of information in listing process](./diagrams/Item_Listing_Sequence_Diagram.png)
-![Activity Diagram showing the item listing process](./diagrams/Item_Listing_Diagram.png)
+![Activity Diagram showing the item listing process](./diagrams/item_listing_diagram.png)
 
 ## 3. All users should be able to see all active auctions.
 ### Use Cases
@@ -31,8 +30,7 @@
 - This query will access the databse containing all items currently for auction
 - From here it will begine to check each specific item to see if its name or description contain the keyword
 - All items that contain said keyword will be displayed
-![Sequence Diagram showing the exchange of information in the viewing of items process](./diagrams/item_display_sequence_diagram.png)
-![Activity Diagram showing the flow of viewing active auctions](./diagrams/item_display_action_diagram.png)
+![alt text](https://github.com/zoesadowski/CPS490_ebay_app/blob/main/diagrams/Filter.jpg)
 
 ## 4. All users should be able to click on an active auction.
 ### Use Cases
@@ -45,5 +43,3 @@
 - Bid on Auction: Pulls up menu for user to place bids. Must be more than highest bid.
 - View bid history: Shows history of bids, featuring user and amount bidded.
 ### Use Case Descriptions and Diagrams
-![Sequence Diagram showing the bidding process](./diagrams/Bidding_Sequence_Diagram.png)
-![Activity Diagram showing the flow of bidding in auctions](./diagrams/Bidding_Diagram.png)

@@ -27,6 +27,8 @@ export function Signup() {
             <hr />
             <br />
             <div className="user-input">
+            <h2>Signup</h2>
+            <div>
                 <label htmlFor="create-username"> Username: </label>
                 <input
                     type="text"
