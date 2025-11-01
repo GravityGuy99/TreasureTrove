@@ -30,6 +30,7 @@ export function Login() {
             <Header />
             <hr />
             <br />
+            <div className="user-input">
             <h2>Login</h2>
             <div>
                 <label htmlFor="create-username"> Username: </label>
@@ -41,7 +42,7 @@ export function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="user-input">
                 <label htmlFor="create-password"> Password: </label>
                 <input
                     type="password"

@@ -1,7 +1,5 @@
 import { useAuth } from "../contexts/AuthContext.jsx"
-
 import {  Link } from "react-router-dom";
-
 
 export function LoginCheck() {
     const [token] = useAuth()
@@ -9,7 +7,7 @@ export function LoginCheck() {
     if(!token) {
         return(
         <div> 
-            Please log in to view the special page.
+            <p>Please log in to view the special page.</p>
             <hr />
         </div>
         
@@ -20,7 +18,7 @@ export function LoginCheck() {
         //tells the user that they can now go to the special page
         //includes a link to said page
         <div>
-            <Link to='/specialpage'>You can now go to the special page!</Link>
+            <Link to='/specialpage'><p>You can now go to the special page!</p></Link>
             <hr />
         </div>
 

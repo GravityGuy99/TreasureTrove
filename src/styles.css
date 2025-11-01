@@ -1,0 +1,14 @@
+body, hr{
+    margin: 0px;
+}
+/* this helped me remember how to implement id */
+/* w3schools.com/html/html_id.asp */
+p, .non-header-link{
+margin: 8px;
+}
+form{
+    text-align: center;
+}
+.user-input{
+    margin-bottom: 10px;
+}
