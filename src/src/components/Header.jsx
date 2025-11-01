@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { User } from "./User.jsx";
 
@@ -14,7 +14,7 @@ export function Header() {
                 textAlign: 'left',
                 color: 'white'
             }}>
-                 <span>Logged in as <User id ={sub} /></span>
+                 Logged in as <User id ={sub} />| <Link to='/user'>Profile</Link>| <div style={{ textAlign:'right'}}><Link to='/'>Home Page</Link></div>
                 <br />
                 <button onClick={() => setToken(null)}>Logout</button>
             </div>
