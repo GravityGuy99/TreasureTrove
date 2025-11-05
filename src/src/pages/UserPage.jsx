@@ -20,10 +20,10 @@ export function UserPage() {
   const posts = postsQuery.data ?? []
 
   return (
-    <div style={{padding: 8}}>
+    <div style={{padding: 0}}>
       <Header />
-      <br />
       <hr />
+      <br />
       <br />
       <PostSorting
         fields={["createdAt", "title"]}
