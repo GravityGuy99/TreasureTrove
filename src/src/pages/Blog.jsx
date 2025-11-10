@@ -1,16 +1,47 @@
+import { PostList } from '../components/PostList.jsx'
+import { CreatePost } from '../components/CreatePost.jsx'
+import { PostFilter } from '../components/PostFilter.jsx'
+import { PostSorting } from '../components/PostSorting.jsx'
+import { getPosts } from '../api/posts.js'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { Header } from '../components/Header.jsx'
-import { LoginCheck } from '../components/LoginCheck.jsx'
 
+export function Blog(){
+  const [author, setAuthor] = useState('')
+  const [sortBy, setSortBy] = useState('createdAt')
+  const [sortOrder, setSortOrder] = useState('descending')
+  const postsQuery = useQuery({
+    queryKey: ['posts', {author, sortBy, sortOrder}],
+    queryFn: () => getPosts({author, sortBy, sortOrder}),
+  })
 
-//I gutted most of the blog page to only all LoginCheck, which is a reduced version of CreatePost
-export function Blog() {
+  const posts = postsQuery.data ?? []
 
   return (
     <div style={{padding: 0}}>
-      <Header />
-      <hr />
-      <br />
-      <LoginCheck />
+        <Header />
+        <hr />
+        <br />
+        <CreatePost />
+        <hr />
+        <br />
+        Filter By:
+        <PostFilter 
+          field='author' 
+          value={author}
+          onChange={(value) => setAuthor(value)}
+          />
+        <br />
+        <PostSorting
+          fields={['createdAt', 'updatedAt']}
+          value={sortBy}
+          onChange={(value) => setSortBy(value)}
+          orderValue={sortOrder}
+          onOrderChange={(orderValue) => setSortOrder(orderValue)}
+        />
+        <hr />
+        <PostList posts={posts} />
     </div>
   )
 }

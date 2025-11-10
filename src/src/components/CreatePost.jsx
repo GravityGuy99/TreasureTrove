@@ -7,9 +7,10 @@ export function CreatePost() {
     const [token] = useAuth()
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('')
+    const [expiresAt, setExpiresAt] = useState('')  
     const queryClient = useQueryClient()
     const createPostMutation = useMutation({
-        mutationFn: () => createPost(token, {title, contents}),
+        mutationFn: () => createPost(token, {title, contents, expiresAt}),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]}),
         onError: (err) => {
             console.error('createPost failed', err)
@@ -19,7 +20,7 @@ export function CreatePost() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("Submitting", {title, contents})
+        console.log("Submitting", {title, contents, expiresAt})
         createPostMutation.mutate()
     }
 
@@ -43,11 +44,24 @@ export function CreatePost() {
                 onChange={(e) => setContents(e.target.value)}
             />
             <br />
+            
+            <div>
+                <label htmlFor="biddingEndsAt">Bidding ends at:</label>
+                <input
+                type="datetime-local"
+                id="biddingEndsAt"
+                name="biddingEndsAt"
+                value={expiresAt}
+                onChange={(e) => setExpiresAt(e.target.value)}
+                required
+                />
+            </div>
+
             <br />
             <input 
                 type="submit" 
                 value={createPostMutation.isPending ? 'Creating...' : "Create"}
-                disabled={!title || createPostMutation.isPending}
+                disabled={!title || createPostMutation.isPending || !expiresAt}
             />
             {createPostMutation.isSuccess ? (
                 <>
