@@ -12,6 +12,7 @@ export function UserPage() {
   const [sortOrder, setSortOrder] = useState('descending')
   const userId = useUser()
 
+  
   const postsQuery = useQuery({
     queryKey: ['posts', {author: userId, sortBy, sortOrder}],
     queryFn: () => getPosts({author: userId, sortBy, sortOrder}),

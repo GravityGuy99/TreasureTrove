@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </div>
   </React.StrictMode>
 )
-//Relevant code inspired byhttps://www.geeksforgeeks.org/reactjs/how-to-set-background-images-in-reactjs/
+//Relevant code inspired by https://www.geeksforgeeks.org/reactjs/how-to-set-background-images-in-reactjs/
 //Background image looked awful so I took the hex code and reapplied it

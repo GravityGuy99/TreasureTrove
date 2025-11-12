@@ -7,6 +7,7 @@ import { Login } from './pages/Login.jsx'
 import { ProfileRedirect } from './pages/ProfileRedirect.jsx'
 import { SpecialPage } from './pages/SpecialPage.jsx'
 import { UserPage } from './pages/UserPage.jsx'
+import { ItemPage } from './pages/ItemPage.jsx'
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,15 @@ const router = createBrowserRouter([
     {
         path: '/specialpage',
         element: <SpecialPage />,
-    }
+    },
+    {
+        path: '/item/:id',
+        element: <ItemPage />,
+    },
+    {
+        path: '/item',
+        element: <ProfileRedirect />,
+    },
 ])
 const queryClient = new QueryClient()
 
