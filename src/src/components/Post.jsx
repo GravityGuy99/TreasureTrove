@@ -12,6 +12,7 @@ export function Post({title, contents, author, expiresAt}){
     }
     return (
         <article>
+            <div className="listing-card">
             <h3>{title}</h3>
             <div>{contents}</div>
             {author && (
@@ -21,6 +22,7 @@ export function Post({title, contents, author, expiresAt}){
                     <p>Bidding ends at: {formatDate(expiresAt)}</p>
                 </em>
             )}
+            </div>
         </article>
     )
 }

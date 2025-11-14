@@ -13,6 +13,7 @@ export const getPosts = async (queryParams) => {
         return await res.json()
     } catch (err) {
         console.error("error fetching posts: ", err)
+        return []
     }
 }
 
