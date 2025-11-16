@@ -8,9 +8,10 @@ export function CreatePost() {
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('')
     const [expiresAt, setExpiresAt] = useState('')  
+    const [bid, setBid] = useState('') 
     const queryClient = useQueryClient()
     const createPostMutation = useMutation({
-        mutationFn: () => createPost(token, {title, contents, expiresAt}),
+        mutationFn: () => createPost(token, {title, contents, expiresAt, bid}),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]}),
         onError: (err) => {
             console.error('createPost failed', err)
@@ -44,7 +45,20 @@ export function CreatePost() {
                 onChange={(e) => setContents(e.target.value)}
             />
             <br />
-            
+            <div>
+                <label htmlFor="create-bid">Starting Bid: </label>
+                <input 
+                    type="number" 
+                    min = "1"
+                    step = "1"
+                    name="create-bid" 
+                    id="create-bid"
+                    value={bid}
+                    onChange={(e) => setBid(e.target.value)}
+                    required
+                />
+            </div>
+            <br />
             <div>
                 <label htmlFor="biddingEndsAt">Bidding ends at:</label>
                 <input
@@ -61,7 +75,7 @@ export function CreatePost() {
             <input 
                 type="submit" 
                 value={createPostMutation.isPending ? 'Creating...' : "Create"}
-                disabled={!title || createPostMutation.isPending || !expiresAt}
+                disabled={!title || createPostMutation.isPending || !expiresAt || !bid}
             />
             {createPostMutation.isSuccess ? (
                 <>
