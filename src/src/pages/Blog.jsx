@@ -33,14 +33,16 @@ export function Blog(){
           onChange={(value) => setAuthor(value)}
           />
         <br />
-        <PostSorting
-          fields={['createdAt', 'updatedAt']}
-          value={sortBy}
-          onChange={(value) => setSortBy(value)}
-          orderValue={sortOrder}
-          onOrderChange={(orderValue) => setSortOrder(orderValue)}
-        />
+          <PostSorting
+            fields={['createdAt', 'updatedAt']}
+            value={sortBy}
+            onChange={(value) => setSortBy(value)}
+            orderValue={sortOrder}
+            onOrderChange={(orderValue) => setSortOrder(orderValue)}
+          />
         <hr />
+        <h2 style={{ textAlign: "center" }}>Listings</h2>
+        <br />
         <PostList posts={posts} />
     </div>
   )
