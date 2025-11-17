@@ -13,15 +13,15 @@ export function Post({title, contents, author, expiresAt}){
     return (
         <article>
             <div className="listing-card">
-            <h3>{title}</h3>
-            <div>{contents}</div>
-            {author && (
-                <em>
-                    <br />
-                    Posted by <User id={author} />
-                    <p>Bidding ends at: {formatDate(expiresAt)}</p>
-                </em>
-            )}
+                <h3>{title}</h3>
+                {contents}
+                {author && (
+                    <em>
+                        <br />
+                        Posted by <User id={author} />
+                        <p>Bidding ends at: {formatDate(expiresAt)}</p>
+                    </em>
+                )}
             </div>
         </article>
     )

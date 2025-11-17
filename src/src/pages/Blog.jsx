@@ -41,6 +41,8 @@ export function Blog(){
             onOrderChange={(orderValue) => setSortOrder(orderValue)}
           />
         <hr />
+        <h2 style={{ textAlign: "center" }}>Listings</h2>
+        <br />
         <PostList posts={posts} />
     </div>
   )
