@@ -11,15 +11,8 @@ export function CreatePost() {
     const [bid, setBid] = useState('') 
     const [image, setImage] = useState(null)
     const queryClient = useQueryClient()
-    /*const createPostMutation = useMutation({
-        mutationFn: () => createPost(token, {title, contents, expiresAt, bid}),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]}),
-        onError: (err) => {
-            console.error('createPost failed', err)
-            alert(err?.message || 'Failed to create post')
-        }
-    })*/
     const createPostMutation = useMutation({
+        //mutationFn: () => createPost(token, {title, contents, expiresAt, bid}),
         mutationFn: () => {
             const formData = new FormData() 
             formData.append("title", title)
@@ -39,7 +32,7 @@ export function CreatePost() {
             alert(err?.message || 'Failed to create post')
         }
     })
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("Submitting", {title, contents, expiresAt})
