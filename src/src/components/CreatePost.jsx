@@ -12,7 +12,6 @@ export function CreatePost() {
     const [image, setImage] = useState(null)
     const queryClient = useQueryClient()
     const createPostMutation = useMutation({
-        //mutationFn: () => createPost(token, {title, contents, expiresAt, bid}),
         mutationFn: () => {
             const formData = new FormData() 
             formData.append("title", title)

@@ -40,16 +40,9 @@ export function postsRoutes(app) {
             return res.status(500).end()
         }
     })
-    /*app.post('/api/v1/posts/', requireAuth, async (req, res) => {
-        try {
-            const post = await createPost(req.auth.sub, req.body)
-            return res.json(post)
-        } catch (err) {
-            console.error('error creating post ', err)
-            return res.status(500).end()
-        }
-    })*/
-   app.post('/api/v1/posts/', requireAuth, upload.single("image"), async (req, res) => {
+    //this post will also include up to one image.
+    // The image is currently optional, but that can be changed elsewhere
+    app.post('/api/v1/posts/', requireAuth, upload.single("image"), async (req, res) => {
     try {
         const image = req.file ? `/uploads/${req.file.filename}` : null
 
