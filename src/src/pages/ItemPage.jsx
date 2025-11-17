@@ -1,21 +1,48 @@
-import { PostList } from '../components/PostList.jsx'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'react-router-dom'
 import { getPosts } from '../api/posts.js'
 import { Header } from '../components/Header.jsx'
-import { useParams } from 'react-router-dom';
+import { Post } from '../components/Post.jsx'
 
-  
 
 export function ItemPage() {
-  const { id } = useParams(); // Accesses the 'id' parameter from the URL
-  const post = getPosts(id); // Hypothetical function to get post by ID
-  
+  //Grabs ID from the URL
+  const { itemId } = useParams()
+
+  //Fetches the item data based on the ID
+  const itemQuery = useQuery({
+    queryKey: ['posts', itemId],
+    queryFn: () => getPosts({ id: itemId }),
+  })
+
+  const item = itemQuery.data
+//Shows an error if there is an error fetching the item
+  if (itemQuery.isError) {
+    return (
+      <div>
+        <Header />
+        <p>Error loading item</p>
+      </div>
+    )
+  }
+
+  //Shows an error if item does not exist
+  if (!item) {
+    return (
+      <div>
+        <Header />
+        <p>Item not found</p>
+      </div>
+    )
+  }
+  //Shows the item details
   return (
-    <div style={{padding: 0}}>
+    <div style={{ padding: 0 }}>
       <Header />
       <hr />
       <br />
-      <br />
-      <PostList post={[post]} />
+      <Post {...item} />
+      <hr />
     </div>
   )
 }

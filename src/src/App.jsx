@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         path: '/user/:userId',
         element: <UserPage />,
     },
+    {//new rout for item page
+        path: '/item/:itemId',
+        element: <ItemPage />,
+    },
     {
         path: '/specialpage',
         element: <SpecialPage />,
