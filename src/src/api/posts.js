@@ -16,7 +16,7 @@ export const getPosts = async (queryParams) => {
     }
 }
 
-export const createPost = async (token, post) => {
+/*export const createPost = async (token, post) => {
     try {
         const url = new URL('posts', import.meta.env.VITE_BACKEND_URL)
         const res = await fetch(url.toString(), {
@@ -31,4 +31,22 @@ export const createPost = async (token, post) => {
     } catch (err) {
         console.error("Error creating posts: ", err)
     }
+}*/
+export const createPost = async (token, formData) => { //pretty similar to what it was before, but now it made for multer
+    try {
+        const url = new URL('posts', import.meta.env.VITE_BACKEND_URL)
+
+        const res = await fetch(url.toString(), {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            body: formData
+        })
+
+        return await res.json()
+    } catch (err) {
+        console.error("Error creating posts: ", err)
+    }
 }
+

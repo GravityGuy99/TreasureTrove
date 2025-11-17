@@ -9,9 +9,30 @@ export function CreatePost() {
     const [contents, setContents] = useState('')
     const [expiresAt, setExpiresAt] = useState('')  
     const [bid, setBid] = useState('') 
+    const [image, setImage] = useState(null)
     const queryClient = useQueryClient()
-    const createPostMutation = useMutation({
+    /*const createPostMutation = useMutation({
         mutationFn: () => createPost(token, {title, contents, expiresAt, bid}),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]}),
+        onError: (err) => {
+            console.error('createPost failed', err)
+            alert(err?.message || 'Failed to create post')
+        }
+    })*/
+    const createPostMutation = useMutation({
+        mutationFn: () => {
+            const formData = new FormData() 
+            formData.append("title", title)
+            formData.append("contents", contents)
+            formData.append("expiresAt", expiresAt)
+            formData.append("bid", bid)
+
+            if (image) {
+                formData.append("image", image) 
+            }
+
+            return createPost(token, formData) 
+        },
         onSuccess: () => queryClient.invalidateQueries({queryKey: ["posts"]}),
         onError: (err) => {
             console.error('createPost failed', err)
@@ -44,6 +65,16 @@ export function CreatePost() {
                 value={contents}
                 onChange={(e) => setContents(e.target.value)}
             />
+            <br />
+             <div>
+                <label htmlFor="post-image">Image: </label>
+                <input //Pretty simple. It accepts images files. But it only accepts 1 file
+                    type="file"
+                    id="post-image"
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}
+                />
+            </div>
             <br />
             <div>
                 <label htmlFor="create-bid">Starting Bid: </label>

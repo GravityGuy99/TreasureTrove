@@ -1,9 +1,11 @@
 import { Post } from '../db/models/post.js'
 import { User } from '../db/models/user.js'
 
-export async function createPost(userId, {title,  contents, tags, expiresAt ,bid}){
+//I've added all the new fields in createPost
+export async function createPost(userId, { title, contents, tags, expiresAt, bid, image}
+) {
     console.log('inside services createPost')
-    const post = new Post({title, author: userId, contents, tags, expiresAt: expiresAt ? new Date(expiresAt) : undefined, bid})
+    const post = new Post({title, author: userId, contents, tags, expiresAt: expiresAt ? new Date(expiresAt) : undefined, bid, image})
     return await post.save()
 }
 
