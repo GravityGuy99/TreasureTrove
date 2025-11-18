@@ -12,23 +12,26 @@ export function Post({title, contents, author, expiresAt, bid, image}){
     }
     return (
         <article>
-            <h3>{title}</h3>
-            {image && (
-                <div>
-                    <img
-                        src={`http://localhost:3001${image}`} //the image is added here
-                        alt={title}
-                        style={{ maxWidth: "200px", height: "auto" }}
-                    />
-                </div>
-            )}
-            <div>{contents}</div>
-            <div><p>Current bid: {bid}</p></div>
-            <em>
-                <br />
-                Posted by <User id={author} />
-                <p>Bidding ends at: {formatDate(expiresAt)}</p>
-            </em>
+            
+            <div className="listing-card">
+              <h3>{title}</h3>
+                {image && (
+                    <div>
+                        <img
+                            src={`http://localhost:3001${image}`} //the image is added here
+                            alt={title}
+                            style={{ maxWidth: "200px", height: "auto" }}
+                        />
+                    </div>
+                )}
+                <div>{contents}</div>
+                <div><p>Current bid: {bid}</p></div>
+                <em>
+                    <br />
+                    Posted by <User id={author} />
+                    <p>Bidding ends at: {formatDate(expiresAt)}</p>
+                </em>
+            </div>
         </article>
     )
 }
