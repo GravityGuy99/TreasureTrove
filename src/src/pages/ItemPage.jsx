@@ -23,7 +23,9 @@ export function ItemPage() {
       </div>
     )
   }
-  const item = itemQuery.data || []
+
+  //Take the actual item
+  const item = itemQuery.data?.[0]
   //Shows an error if there is an error fetching the item
   if (itemQuery.isError) {
     return (

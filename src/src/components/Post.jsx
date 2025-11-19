@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
 
-export function Post({ title, contents, author, expiresAt, bid, image, _id }) {
+export function Post({ title, contents, author, expiresAt, bid, image, id }) {
   //I got this code from ChatGPT, but I can explain how it works
   //it takes the createdAt data that we created previously and converts it into time that is easy to read by humans
   //using 'short' for dateStyle makes it display the day like mm/dd/yyyy  instead of month dd yyyy
@@ -34,7 +34,7 @@ export function Post({ title, contents, author, expiresAt, bid, image, _id }) {
           <p>Bidding ends at: {formatDate(expiresAt)}</p>
         </em>
         <div>
-          <Link to={`/item/${_id}`}>View Item</Link>
+          <Link to={`/item/${id}`}>View Item</Link>
         </div>
       </div>
     </article>
@@ -48,5 +48,5 @@ Post.propTypes = {
   expiresAt: PropTypes.string,
   bid: PropTypes.number.isRequired,
   image: PropTypes.string,
-  _id: PropTypes.string,
+  id: PropTypes.number,
 }

@@ -2,46 +2,62 @@ import { Post } from '../db/models/post.js'
 import { User } from '../db/models/user.js'
 
 //I've added all the new fields in createPost
-export async function createPost(userId, { title, contents, tags, expiresAt, bid, image}
+export async function createPost(
+  userId,
+  { title, contents, tags, expiresAt, bid, image },
 ) {
-    console.log('inside services createPost')
-    const post = new Post({title, author: userId, contents, tags, expiresAt: expiresAt ? new Date(expiresAt) : undefined, bid, image})
-    return await post.save()
+  console.log('inside services createPost')
+
+  // Generate next ID by finding the max existing ID and incrementing
+  let maxPost = await Post.findOne().sort({ id: -1 }).limit(1)
+  const nextId = maxPost ? maxPost.id + 1 : 1
+
+  const post = new Post({
+    id: nextId,
+    title,
+    author: userId,
+    contents,
+    tags,
+    expiresAt: expiresAt ? new Date(expiresAt) : undefined,
+    bid,
+    image,
+  })
+  return await post.save()
 }
 
 async function listPosts(
-    query = {},
-    { sortBy = 'createdAt', sortOrder = 'descending'} = {},    
-){
-    return await Post.find(query).sort({[sortBy]: sortOrder})
+  query = {},
+  { sortBy = 'createdAt', sortOrder = 'descending' } = {},
+) {
+  return await Post.find(query).sort({ [sortBy]: sortOrder })
 }
 
-export async function listAllPosts (options){
-    return await listPosts({}, options)
+export async function listAllPosts(options) {
+  return await listPosts({}, options)
 }
 
-export async function listPostsByAuthor (authorUsername, options){ 
-    const user = await User.findOne({username: authorUsername})
-    if (!user) return []
-    return await listPosts({author: user._id}, options)
+export async function listPostsByAuthor(authorUsername, options) {
+  const user = await User.findOne({ username: authorUsername })
+  if (!user) return []
+  return await listPosts({ author: user._id }, options)
 }
 
-export async function listPostsByTag(tags, options){ 
-    return await listPosts({tags}, options)
+export async function listPostsByTag(tags, options) {
+  return await listPosts({ tags }, options)
 }
 
-export async function getPostById(postID){
-    return await Post.findById(postID)
+export async function getPostById(postID) {
+  return await Post.findById(postID)
 }
 
-export async function updatePost(userId, postID, {title, contents, tags}){ 
-    return await Post.findOneAndUpdate(
-        {_id: postID, author: userId},
-        {$set: {title, contents, tags}}, 
-        {new: true},
-    )
+export async function updatePost(userId, postID, { title, contents, tags }) {
+  return await Post.findOneAndUpdate(
+    { _id: postID, author: userId },
+    { $set: { title, contents, tags } },
+    { new: true },
+  )
 }
 
-export async function deletePost(userId, postId) { 
-    return await Post.deleteOne({_id: postId, author: userId})
+export async function deletePost(userId, postId) {
+  return await Post.deleteOne({ _id: postId, author: userId })
 }
