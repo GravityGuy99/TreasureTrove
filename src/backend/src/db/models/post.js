@@ -6,6 +6,8 @@ const postSchema = new Schema({
     contents: String,
     tags: [String],
     expiresAt: {type: Date}, //new field that defines when the post expires
+    bid: {type: Number},
+    image: {type: String}
 },
 {timestamps: true},
 )
