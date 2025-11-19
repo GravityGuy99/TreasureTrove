@@ -16,7 +16,18 @@ export function ItemPage() {
   })
 
   const item = itemQuery.data
-//Shows an error if there is an error fetching the item
+
+  //Shows a loading message while fetching
+  if (itemQuery.isLoading) {
+    return (
+      <div>
+        <Header />
+        <p>Loading item...</p>
+      </div>
+    )
+  }
+
+  //Shows an error if there is an error fetching the item
   if (itemQuery.isError) {
     return (
       <div>
