@@ -13,22 +13,25 @@ export const getPosts = async (queryParams) => {
         return await res.json()
     } catch (err) {
         console.error("error fetching posts: ", err)
+        return []
     }
 }
 
-export const createPost = async (token, post) => {
+export const createPost = async (token, formData) => { //pretty similar to what it was before, but now it made for multer
     try {
         const url = new URL('posts', import.meta.env.VITE_BACKEND_URL)
+
         const res = await fetch(url.toString(), {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(post),
+            body: formData
         })
+
         return await res.json()
     } catch (err) {
         console.error("Error creating posts: ", err)
     }
 }
+

@@ -8,6 +8,7 @@ import {
     deletePost
 } from '../services/post.js'
 import { requireAuth } from '../middleware/jwt.js'
+import { upload } from '../middleware/upload.js'
 
 export function postsRoutes(app) {
     app.get('/api/v1/posts', async (req, res) => {
@@ -39,15 +40,24 @@ export function postsRoutes(app) {
             return res.status(500).end()
         }
     })
-    app.post('/api/v1/posts/', requireAuth, async (req, res) => {
-        try {
-            const post = await createPost(req.auth.sub, req.body)
-            return res.json(post)
-        } catch (err) {
-            console.error('error creating post ', err)
-            return res.status(500).end()
-        }
+    //this post will also include up to one image.
+    // The image is currently optional, but that can be changed elsewhere
+    app.post('/api/v1/posts/', requireAuth, upload.single("image"), async (req, res) => {
+    try {
+        const image = req.file ? `/uploads/${req.file.filename}` : null
+
+        const post = await createPost(req.auth.sub, {
+            ...req.body,
+            image     // pass image path to service
+        })
+
+        return res.json(post)
+    } catch (err) {
+        console.error('error creating post ', err)
+        return res.status(500).end()
+    }
     })
+
     app.patch('/api/v1/posts/:id', requireAuth, async (req, res) => {
         try {
             const post = await updatePost(req.auth.sub, req.params.id, req.body)

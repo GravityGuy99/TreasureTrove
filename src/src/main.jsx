@@ -4,9 +4,7 @@ import { App } from './App.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div style={{background: '#A4C2FA', height: '100vh', backgroundSize: "cover"}}>
       <App />
-    </div>
   </React.StrictMode>
 )
 //Relevant code inspired by https://www.geeksforgeeks.org/reactjs/how-to-set-background-images-in-reactjs/
