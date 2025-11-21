@@ -7,7 +7,7 @@ export function LoginCheck() {
     if(!token) {
         return(
         <div> 
-            <p>Please log in to view the special page.</p>
+            <p>Please log in to create a post.</p>
             <hr />
         </div>
         
@@ -15,10 +15,10 @@ export function LoginCheck() {
     }
     
     return( 
-        //tells the user that they can now go to the special page
+        //tells the user that they can now go to the create post page
         //includes a link to said page
         <div>
-            <Link to='/specialpage'><p>You can now go to the special page!</p></Link>
+            <Link to='/createpost'><p>Create Post</p></Link>
             <hr />
         </div>
 

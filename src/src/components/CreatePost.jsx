@@ -45,9 +45,9 @@ export function CreatePost() {
   if (!token) return <div> Please log in to create new posts. </div>
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="create-post">
       <div>
-        <label htmlFor='create-title'>Title: </label>
+        <label htmlFor='create-title'><h3>Title</h3></label>
         <input
           type='text'
           name='create-title'
@@ -57,13 +57,14 @@ export function CreatePost() {
         />
       </div>
       <br />
+      <h3>Description (Optional)</h3>
       <textarea
         value={contents}
         onChange={(e) => setContents(e.target.value)}
       />
       <br />
       <div>
-        <label htmlFor='post-image'>Image: </label>
+        <label htmlFor='post-image'><h3>Image (Optional)</h3></label>
         <input //Pretty simple. It accepts images files. But it only accepts 1 file
           type='file'
           id='post-image'
@@ -73,7 +74,7 @@ export function CreatePost() {
       </div>
       <br />
       <div>
-        <label htmlFor='create-bid'>Starting Bid: </label>
+        <label htmlFor='create-bid'><h3>Starting Bid</h3></label>
         <input
           type='number'
           min='1'
@@ -87,7 +88,7 @@ export function CreatePost() {
       </div>
       <br />
       <div>
-        <label htmlFor='biddingEndsAt'>Bidding ends at:</label>
+        <label htmlFor='biddingEndsAt'><h3>Bidding ends</h3></label>
         <input
           type='datetime-local'
           id='biddingEndsAt'
@@ -100,6 +101,7 @@ export function CreatePost() {
 
       <br />
       <input
+        className='make-post'
         type='submit'
         value={createPostMutation.isPending ? 'Creating...' : 'Create'}
         disabled={!title || createPostMutation.isPending || !expiresAt || !bid}

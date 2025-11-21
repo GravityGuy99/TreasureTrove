@@ -51,5 +51,30 @@ and I used ChatGPT with the prompts:
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 200px;
+}
 
+.create-post {
+    background: #cddfff;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 400px;
+    height: 525px;
+    margin: auto;
+}
+h3 {
+    margin: 10px;
+}
+
+textarea{
+    resize: none;
+}
+
+.make-post{
+    width: 200px;
+    height: 60px;
 }
