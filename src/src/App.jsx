@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     {
         path: '/createpost',
         element: <CreatePostPage />,
-    }
+    },
     {
       path: '/item/:itemId',
       element: <ItemPage />,
