@@ -5,7 +5,7 @@ import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
 import { ProfileRedirect } from './pages/ProfileRedirect.jsx'
-import { SpecialPage } from './pages/SpecialPage.jsx'
+import { CreatePostPage } from './pages/CreatePostPage.jsx'
 import { UserPage } from './pages/UserPage.jsx'
 
 const router = createBrowserRouter([
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
         element: <UserPage />,
     },
     {
-        path: '/specialpage',
-        element: <SpecialPage />,
+        path: '/createpost',
+        element: <CreatePostPage />,
     }
 ])
 const queryClient = new QueryClient()

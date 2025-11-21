@@ -15,10 +15,10 @@ export function LoginCheck() {
     }
     
     return( 
-        //tells the user that they can now go to the special page
+        //tells the user that they can now go to the create post page
         //includes a link to said page
         <div>
-            <Link to='/specialpage'><p>Create Post</p></Link>
+            <Link to='/createpost'><p>Create Post</p></Link>
             <hr />
         </div>
 

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { Header } from '../components/Header.jsx'
 import { CreatePost } from '../components/CreatePost.jsx'
 
-export function SpecialPage() {
+export function CreatePostPage() {
 
   const [token] = useAuth()
     //if the user is not logged in, redirect to login page
@@ -12,7 +12,7 @@ export function SpecialPage() {
     }
     
   //can send user back to main page
-  //also announces you are in the special page
+  //also announces you are in the create post page
   //this page is very simple
   return (
     <div style={{padding: 0}}>
