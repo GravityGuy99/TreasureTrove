@@ -1,4 +1,4 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Blog } from './pages/Blog.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Signup } from './pages/Signup.jsx'
@@ -7,9 +7,10 @@ import { Login } from './pages/Login.jsx'
 import { ProfileRedirect } from './pages/ProfileRedirect.jsx'
 import { CreatePostPage } from './pages/CreatePostPage.jsx'
 import { UserPage } from './pages/UserPage.jsx'
+import { ItemPage } from './pages/ItemPage.jsx'
 
 const router = createBrowserRouter([
-    {
+   {
         path: '/',
         element: <Blog />,
     },
@@ -33,15 +34,23 @@ const router = createBrowserRouter([
         path: '/createpost',
         element: <CreatePostPage />,
     }
+    {
+      path: '/item/:itemId',
+      element: <ItemPage />,
+    },
+    {
+      path: '/item',
+      element: <ProfileRedirect />,
+    },
 ])
 const queryClient = new QueryClient()
 
 export function App() {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <AuthContextProvider>
-                <RouterProvider router={router} />
-            </AuthContextProvider>
-        </QueryClientProvider>
-    )
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </QueryClientProvider>
+  )
 }
