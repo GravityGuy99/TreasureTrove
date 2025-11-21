@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { getPosts } from '../api/posts.js'
+import { getPostByNumericId } from '../api/posts.js'
 import { Header } from '../components/Header.jsx'
 import { Post } from '../components/Post.jsx'
 
@@ -11,7 +11,7 @@ export function ItemPage() {
   // Fetches the item data based on the ID
   const itemQuery = useQuery({
     queryKey: ['posts', itemId],
-    queryFn: () => getPosts({ id: itemId }),
+    queryFn: () => getPostByNumericId(itemId),
   })
 
   //Shows a loading message while fetching
