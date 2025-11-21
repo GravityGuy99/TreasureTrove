@@ -1,4 +1,5 @@
-import { createUser, loginUser, getUserInfoById } from '../services/users.js'
+import { createUser, loginUser, getUserInfoById, addTokens } from '../services/users.js'
+import { requireAuth } from '../middleware/jwt.js'
 
 export function userRoutes(app) {
     app.get('/api/v1/users/:id', async (req, res) => {
@@ -13,6 +14,18 @@ export function userRoutes(app) {
             return res.status(400).send({
                 error: 'login failed, did you enter the correct username/password?'
             })
+        }
+    })
+    // Add tokens to the currently authenticated user
+    app.post('/api/v1/user/tokens', requireAuth, async (req, res) => {
+        try {
+            const userId = req.auth && req.auth.sub
+            if (userId == null) return res.status(401).send({ error: 'unauthenticated' })
+            const tokens = await addTokens(userId)
+            return res.status(200).send({ tokens })
+        } catch (err) {
+            console.error('error adding tokens: ', err)
+            return res.status(400).send({ error: 'failed to add tokens' })
         }
     })
     app.post('/api/v1/user/signup', async (req, res) => {

@@ -30,8 +30,21 @@ export async function getUserInfoById(userId) {
     try{
         const user = await User.findById(userId)
         if (!user) return {username: userId}
-        return {username: user.username}
+        return {username: user.username, tokens: user.tokens ?? 0}
     } catch (err) {
         return {username: userId}
     }
+}
+
+export async function addTokens(userId) {
+    // Fixed amount of tokens to add when this endpoint is called.
+    // Keep in sync with the frontend ADD_AMOUNT constant.
+    const inc = 1000
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { $inc: { tokens: inc } },
+        { new: true }
+    )
+    if (!user) throw new Error('user not found')
+    return user.tokens
 }
