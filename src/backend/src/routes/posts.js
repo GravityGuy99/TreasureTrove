@@ -54,7 +54,7 @@ export function postsRoutes(app) {
         return res.json(post)
     } catch (err) {
         console.error('error creating post ', err)
-        return res.status(500).end()
+        return res.status(500).json({ error: err.message || 'Internal Server Error' })
     }
     })
 
