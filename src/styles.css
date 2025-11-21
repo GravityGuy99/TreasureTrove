@@ -67,14 +67,14 @@ and I used ChatGPT with the prompts:
     margin: auto;
 }
 h3 {
-    margin: 0px;
+    margin: 10px;
 }
 
 textarea{
     resize: none;
 }
 
-.makePost{
+.make-post{
     width: 200px;
     height: 60px;
 }
