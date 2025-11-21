@@ -1,6 +1,7 @@
-import {Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
+import { Header } from '../components/Header.jsx'
+import { CreatePost } from '../components/CreatePost.jsx'
 
 export function SpecialPage() {
 
@@ -14,13 +15,11 @@ export function SpecialPage() {
   //also announces you are in the special page
   //this page is very simple
   return (
-    <div>
-      <br />
-      <Link to='/'><p>Back to main page</p></Link> 
-      <br />
+    <div style={{padding: 0}}>
+      <Header />
       <hr />
       <br />
-      <p>You are in the special page! Yay!</p>
+      <CreatePost />
     </div>
   )
 }

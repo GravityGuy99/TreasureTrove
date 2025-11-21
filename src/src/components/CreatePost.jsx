@@ -41,9 +41,11 @@ export function CreatePost() {
     if(!token) return <div> Please log in to create new posts. </div>
     
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="create-post">
+            <br />
             <div>
-                <label htmlFor="create-title">Title: </label>
+                <label htmlFor="create-title"><h3>Title </h3></label>
+                <br />
                 <input 
                     type="text" 
                     name="create-title" 
@@ -53,14 +55,17 @@ export function CreatePost() {
                 />
             </div>
             <br />
+            <label htmlFor="create-contents"><h3>Contents</h3> </label>
+            <br />
             <textarea 
                 value={contents}
                 onChange={(e) => setContents(e.target.value)}
             />
             <br />
-             <div>
-                <label htmlFor="post-image">Image: </label>
-                <input //Pretty simple. It accepts images files. But it only accepts 1 file
+            <div>
+                <h3>Image</h3>
+                <br />
+                <input
                     type="file"
                     id="post-image"
                     accept="image/*"
@@ -69,7 +74,8 @@ export function CreatePost() {
             </div>
             <br />
             <div>
-                <label htmlFor="create-bid">Starting Bid: </label>
+                <label htmlFor="create-bid"><h3>Starting Bid</h3></label>
+                <br />
                 <input 
                     type="number" 
                     min = "1"
@@ -83,7 +89,8 @@ export function CreatePost() {
             </div>
             <br />
             <div>
-                <label htmlFor="biddingEndsAt">Bidding ends at:</label>
+                <label htmlFor="biddingEndsAt"><h3>bidding ends</h3> </label>
+                <br />
                 <input
                 type="datetime-local"
                 id="biddingEndsAt"
@@ -96,6 +103,7 @@ export function CreatePost() {
 
             <br />
             <input 
+                className ="makePost"
                 type="submit" 
                 value={createPostMutation.isPending ? 'Creating...' : "Create"}
                 disabled={!title || createPostMutation.isPending || !expiresAt || !bid}
