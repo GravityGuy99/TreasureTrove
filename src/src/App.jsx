@@ -5,43 +5,43 @@ import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
 import { ProfileRedirect } from './pages/ProfileRedirect.jsx'
-import { SpecialPage } from './pages/SpecialPage.jsx'
+import { CreatePostPage } from './pages/CreatePostPage.jsx'
 import { UserPage } from './pages/UserPage.jsx'
 import { ItemPage } from './pages/ItemPage.jsx'
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Blog />,
-  },
-  {
-    path: '/signup',
-    element: <Signup />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/user',
-    element: <ProfileRedirect />,
-  },
-  {
-    path: '/user/:userId',
-    element: <UserPage />,
-  },
-  {
-    path: '/item/:itemId',
-    element: <ItemPage />,
-  },
-  {
-    path: '/item',
-    element: <ProfileRedirect />,
-  },
-  {
-    path: '/specialpage',
-    element: <SpecialPage />,
-  },
+   {
+        path: '/',
+        element: <Blog />,
+    },
+    {
+        path: '/signup',
+        element: <Signup />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
+    },
+    {
+        path: '/user',
+        element: <ProfileRedirect />,
+    },
+    {
+        path: '/user/:userId',
+        element: <UserPage />,
+    },
+    {
+        path: '/createpost',
+        element: <CreatePostPage />,
+    },
+    {
+      path: '/item/:itemId',
+      element: <ItemPage />,
+    },
+    {
+      path: '/item',
+      element: <ProfileRedirect />,
+    },
 ])
 const queryClient = new QueryClient()
 
