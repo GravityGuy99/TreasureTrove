@@ -24,15 +24,18 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
             />
           </div>
         )}
-        <div>{contents}</div>
+        <br />
         <div>
-          <p>Current bid: {bid}</p>
-        </div>
-        <em>
+          <p>{contents}</p>
           <br />
-          Posted by <User id={author} />
-          <p>Bidding ends at: {formatDate(expiresAt)}</p>
-        </em>
+          <p>Current bid: {bid}</p>
+          <em>
+            <br />
+            Posted by <User id={author} />
+            <p>Bidding ends at: {formatDate(expiresAt)}</p>
+          </em>
+        </div>
+        <br />
         <div>
           <Link to={`/item/${id}`}>View Item</Link>
         </div>
