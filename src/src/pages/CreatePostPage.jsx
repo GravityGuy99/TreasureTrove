@@ -6,10 +6,10 @@ import { CreatePost } from '../components/CreatePost.jsx'
 export function CreatePostPage() {
 
   const [token] = useAuth()
-    //if the user is not logged in, redirect to login page
-    if(!token) {
-      return(<Navigate to="/login" replace={true} />)
-    }
+  //if the user is not logged in, redirect to login page
+  if(!token) {
+    return(<Navigate to="/login" replace={true} />)
+  }
     
   //can send user back to main page
   //also announces you are in the create post page

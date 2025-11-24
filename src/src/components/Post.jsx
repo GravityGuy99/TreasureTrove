@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
 
 export function Post({ title, contents, author, expiresAt, bid, image, id }) {
@@ -36,9 +35,8 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
           </em>
         </div>
         <br />
-        <div>
-          <Link to={`/item/${id}`}>View Item</Link>
-        </div>
+        <button onClick={() => window.location.href = `/item/${id}`} className='details-btn'> View Details </button>
+
       </div>
     </article>
   )

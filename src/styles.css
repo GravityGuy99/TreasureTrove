@@ -77,3 +77,40 @@ textarea{
     width: 200px;
     height: 60px;
 }
+
+.header-btn{
+    background: #c9d8f5;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
+}
+
+.details-btn{
+    background: #A4C2FA;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
+}
+
+.submit-btn{
+    background: #e8f0ff;
+    color:#000;
+    border: 1px solid #424242;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
+}
