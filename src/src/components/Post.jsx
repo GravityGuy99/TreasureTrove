@@ -1,16 +1,43 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
+import { useState, useEffect } from 'react'
 
 export function Post({ title, contents, author, expiresAt, bid, image, id }) {
-  //I got this code from ChatGPT, but I can explain how it works
-  //it takes the createdAt data that we created previously and converts it into time that is easy to read by humans
-  //using 'short' for dateStyle makes it display the day like mm/dd/yyyy  instead of month dd yyyy
-  //using 'short' for timeStyle makes it display the time of day hr:min instead of hr:min:sec
-  function formatDate(dateString) {
-    const date = new Date(dateString)
-    return date.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })
-  }
+  const [timeLeft, setTimeLeft] = useState('')
+
+   // Calculate and update the countdown every second
+  useEffect(() => {
+    function updateCountdown() {
+      //gets the current time and the value of expiresAt and takes the difference
+      const now = new Date().getTime()
+      const end = new Date(expiresAt).getTime()
+      const diff = end - now
+
+      if (diff <= 0) {
+        setTimeLeft('Expired')
+        return
+      }
+      //converts the difference into an easier to read format (days, hours, minutes, seconds as opposed to just milliseconds)
+      const seconds = Math.floor((diff / 1000) % 60)
+      const minutes = Math.floor((diff / 1000 / 60) % 60)
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      if(days > 0){
+        setTimeLeft(`${days}d`)
+      } else if(hours>0) {
+        setTimeLeft(`${hours}h ${minutes}m`)
+      } else {
+        setTimeLeft(`${minutes}m ${seconds}s`)
+      }
+      
+    }
+    //This will call the function once per second. 
+    updateCountdown()
+    const timer = setInterval(updateCountdown, 1000)
+
+    return () => clearInterval(timer)
+  }, [expiresAt])
   return (
     <article>
       <div className='listing-card'>
@@ -31,7 +58,7 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
         <em>
           <br />
           Posted by <User id={author} />
-          <p>Bidding ends at: {formatDate(expiresAt)}</p>
+          <p>Time remaining: {timeLeft}</p>
         </em>
         <div>
           <Link to={`/item/${id}`}>View Item</Link>
