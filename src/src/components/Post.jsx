@@ -1,8 +1,25 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import { placeBid } from '../api/posts.js'
+import { useAuth } from '../contexts/AuthContext.jsx'
 
-export function Post({ title, contents, author, expiresAt, bid, image, id }) {
+export function Post({
+  title,
+  contents,
+  author,
+  expiresAt,
+  bid,
+  image,
+  id,
+  bids = [],
+}) {
+  const [token] = useAuth()
+  const [bidAmount, setBidAmount] = useState('')
+  const queryClient = useQueryClient()
+
   //I got this code from ChatGPT, but I can explain how it works
   //it takes the createdAt data that we created previously and converts it into time that is easy to read by humans
   //using 'short' for dateStyle makes it display the day like mm/dd/yyyy  instead of month dd yyyy
@@ -11,6 +28,34 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
     const date = new Date(dateString)
     return date.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })
   }
+  const currentBid =
+    bids.length > 0
+      ? Math.max(...bids.map((b) => Number(b.amount)))
+      : Number(bid || 0)
+
+  const placeBidMutation = useMutation({
+    mutationFn: () => placeBid(token, id, Number(bidAmount)),
+    onSuccess: () => {
+      setBidAmount('')
+      queryClient.invalidateQueries({ queryKey: ['posts', String(id)] })
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
+    },
+    onError: (err) => {
+      console.error('placeBid failed', err)
+      alert(err?.message || 'Failed to place bid')
+    },
+  })
+
+  const handleBidSubmit = (e) => {
+    e.preventDefault()
+    const newBid = Number(bidAmount)
+    if (newBid <= currentBid) {
+      alert(`Bid must be higher than current bid of ${currentBid}`)
+      return
+    }
+    placeBidMutation.mutate()
+  }
+
   return (
     <article>
       <div className='listing-card'>
@@ -26,7 +71,7 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
         )}
         <div>{contents}</div>
         <div>
-          <p>Current bid: {bid}</p>
+          <p>Current bid: {currentBid}</p>
         </div>
         <em>
           <br />
@@ -36,6 +81,32 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
         <div>
           <Link to={`/item/${id}`}>View Item</Link>
         </div>
+
+        {token && (
+          <form onSubmit={handleBidSubmit} className='bid-form'>
+            <div>
+              <label htmlFor={`bid-amount-${id}`}>
+                <h4>Place Your Bid</h4>
+              </label>
+              <input
+                type='number'
+                id={`bid-amount-${id}`}
+                min={currentBid + 1}
+                step='1'
+                value={bidAmount}
+                onChange={(e) => setBidAmount(e.target.value)}
+                placeholder={`Minimum: ${currentBid + 1}`}
+                required
+              />
+              <button
+                type='submit'
+                disabled={!bidAmount || placeBidMutation.isPending}
+              >
+                {placeBidMutation.isPending ? 'Placing Bid...' : 'Place Bid'}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </article>
   )
@@ -49,4 +120,11 @@ Post.propTypes = {
   bid: PropTypes.number.isRequired,
   image: PropTypes.string,
   id: PropTypes.number,
+  bids: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      userId: PropTypes.string.isRequired,
+      timestamp: PropTypes.string.isRequired,
+    }),
+  ),
 }

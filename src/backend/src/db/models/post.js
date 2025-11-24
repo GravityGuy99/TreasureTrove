@@ -10,6 +10,13 @@ const postSchema = new Schema(
     expiresAt: { type: Date }, //new field that defines when the post expires
     bid: { type: Number },
     image: { type: String },
+    bids: [
+      {
+        amount: { type: Number, required: true },
+        userId: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+        timestamp: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true },
 )

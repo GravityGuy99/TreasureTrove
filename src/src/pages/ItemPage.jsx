@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getPosts } from '../api/posts.js'
 import { Header } from '../components/Header.jsx'
 import { Post } from '../components/Post.jsx'
+import { Bid } from '../components/Bids.jsx'
 
 export function ItemPage() {
   //grab itemId from the url params
@@ -54,6 +55,21 @@ export function ItemPage() {
       <br />
       <Post {...item} />
       <hr />
+      <div className='bids-list' style={{ padding: '20px' }}>
+        <h3>Bid History</h3>
+        {item.bids && item.bids.length > 0 ? (
+          item.bids.map((bid, idx) => (
+            <Bid
+              key={idx}
+              amount={bid.amount}
+              userId={bid.userId}
+              timestamp={bid.timestamp}
+            />
+          ))
+        ) : (
+          <p>No bids yet.</p>
+        )}
+      </div>
     </div>
   )
 }

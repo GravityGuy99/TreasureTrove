@@ -45,9 +45,11 @@ export function CreatePost() {
   if (!token) return <div> Please log in to create new posts. </div>
 
   return (
-    <form onSubmit={handleSubmit} className="create-post">
+    <form onSubmit={handleSubmit} className='create-post'>
       <div>
-        <label htmlFor='create-title'><h3>Title</h3></label>
+        <label htmlFor='create-title'>
+          <h3>Title</h3>
+        </label>
         <input
           type='text'
           name='create-title'
@@ -64,7 +66,9 @@ export function CreatePost() {
       />
       <br />
       <div>
-        <label htmlFor='post-image'><h3>Image (Optional)</h3></label>
+        <label htmlFor='post-image'>
+          <h3>Image (Optional)</h3>
+        </label>
         <input //Pretty simple. It accepts images files. But it only accepts 1 file
           type='file'
           id='post-image'
@@ -74,7 +78,9 @@ export function CreatePost() {
       </div>
       <br />
       <div>
-        <label htmlFor='create-bid'><h3>Starting Bid</h3></label>
+        <label htmlFor='create-bid'>
+          <h3>Starting Bid</h3>
+        </label>
         <input
           type='number'
           min='1'
@@ -88,7 +94,9 @@ export function CreatePost() {
       </div>
       <br />
       <div>
-        <label htmlFor='biddingEndsAt'><h3>Bidding ends</h3></label>
+        <label htmlFor='biddingEndsAt'>
+          <h3>Bidding ends</h3>
+        </label>
         <input
           type='datetime-local'
           id='biddingEndsAt'

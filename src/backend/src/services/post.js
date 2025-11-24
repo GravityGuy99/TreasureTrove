@@ -47,7 +47,7 @@ export async function listPostsByTag(tags, options) {
 }
 
 export async function getPostById(postID) {
-  return await Post.findById(postID)
+  return await Post.findOne({ id: postID })
 }
 
 export async function updatePost(userId, postID, { title, contents, tags }) {
@@ -60,4 +60,42 @@ export async function updatePost(userId, postID, { title, contents, tags }) {
 
 export async function deletePost(userId, postId) {
   return await Post.deleteOne({ _id: postId, author: userId })
+}
+
+export async function placeBid(userId, postId, amount) {
+  const post = await Post.findOne({ id: postId })
+  if (!post) throw new Error('Post not found')
+
+  // Check if post has expired
+  if (post.expiresAt && new Date(post.expiresAt) < new Date()) {
+    throw new Error('Bidding has ended for this item')
+  }
+
+  // Calculate current highest bid
+  const currentHighest =
+    post.bids && post.bids.length > 0
+      ? Math.max(...post.bids.map((b) => b.amount))
+      : post.bid || 0
+
+  // Validate new bid is higher
+  if (amount <= currentHighest) {
+    throw new Error(`Bid must be higher than current bid of ${currentHighest}`)
+  }
+
+  // Add the new bid
+  const updatedPost = await Post.findOneAndUpdate(
+    { id: postId },
+    {
+      $push: {
+        bids: {
+          amount,
+          userId,
+          timestamp: new Date(),
+        },
+      },
+    },
+    { new: true },
+  )
+
+  return updatedPost
 }
