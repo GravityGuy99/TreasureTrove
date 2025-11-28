@@ -32,4 +32,13 @@ app.get('/', (req, res) => {
     res.send('Hello from Express!')
 })
 
+// Error handler for auth errors (express-jwt)
+app.use((err, req, res, next) => {
+    if (err && (err.name === 'UnauthorizedError' || err.code === 'credentials_required')) {
+        return res.status(401).json({ error: err.message || 'Unauthorized' })
+    }
+    // Pass through other errors
+    next(err)
+})
+
 export {app}

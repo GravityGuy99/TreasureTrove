@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { User } from "./User.jsx";
@@ -11,12 +10,17 @@ export function Header() {
             <div style={{
                 background: '#3C78D8',
                 padding: '15px 30px',
-                textAlign: 'left',
-                color: 'white'
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
             }}>
-                 Logged in as <User id ={sub} />| <Link to='/user'>Profile</Link>| <div style={{ textAlign:'right'}}><Link to='/'>Home Page</Link></div>
-                <br />
-                <button onClick={() => setToken(null)}>Logout</button>
+                <button onClick={() => window.location.href = `/`} className="header-btn"> Home </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+                    <span>Logged in as <User id={sub} /></span>
+                    <button onClick={() => window.location.href = `/user`} className="header-btn"> Profile </button> | 
+                    <button onClick={() => setToken(null)} className="header-btn"> Logout </button>
+                </div>
             </div>
         )
     }
@@ -28,9 +32,12 @@ export function Header() {
             textAlign: 'left',
             display: 'flex',
             justifyContent: 'space-between',
-            color: '#3C78D8'
+            color: 'white'
         }}>
-            <Link to='/'>Home Page</Link> | <div style={{ textAlign:'right'}}><Link to='/login'>Login</Link> | <Link to='/signup'>Signup</Link></div>
+            <button onClick={() => window.location.href = `/`} className="header-btn"> Home </button>
+            <div>
+                <button onClick={() => window.location.href = `/login`} className="header-btn"> Login </button> | <button onClick={() => window.location.href = `/signup`} className="header-btn"> Signup </button>
+            </div>
         </div>
     )
 }
