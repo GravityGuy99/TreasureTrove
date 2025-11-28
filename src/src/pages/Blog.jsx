@@ -24,22 +24,24 @@ export function Blog(){
         <hr />
         <br />
         <LoginCheck />
-        <hr />
         <br />
-        Filter By:
-        <PostFilter 
-          field='author' 
-          value={author}
-          onChange={(value) => setAuthor(value)}
-          />
+        <div style={{paddingLeft: '8px'}}>
+          Filter By:
+          <PostFilter 
+            field='author' 
+            value={author}
+            onChange={(value) => setAuthor(value)}
+            />
+          <br />
+            <PostSorting
+              fields={['createdAt', 'updatedAt']}
+              value={sortBy}
+              onChange={(value) => setSortBy(value)}
+              orderValue={sortOrder}
+              onOrderChange={(orderValue) => setSortOrder(orderValue)}
+            />
+        </div>
         <br />
-          <PostSorting
-            fields={['createdAt', 'updatedAt']}
-            value={sortBy}
-            onChange={(value) => setSortBy(value)}
-            orderValue={sortOrder}
-            onOrderChange={(orderValue) => setSortOrder(orderValue)}
-          />
         <hr />
         <h2 style={{ textAlign: "center" }}>Listings</h2>
         <br />

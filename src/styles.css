@@ -51,7 +51,6 @@ and I used ChatGPT with the prompts:
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 200px;
 }
 
 .create-post {
@@ -77,4 +76,41 @@ textarea{
 .make-post{
     width: 200px;
     height: 60px;
+}
+
+.header-btn{
+    background: #c9d8f5;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
+}
+
+.details-btn{
+    background: #A4C2FA;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
+}
+
+.submit-btn{
+    background: #e8f0ff;
+    color:#000;
+    border: 1px solid #424242;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+    border-radius: 12px;
 }

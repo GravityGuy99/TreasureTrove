@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
 
 export function Post({ title, contents, author, expiresAt, bid, image, id }) {
@@ -24,18 +23,20 @@ export function Post({ title, contents, author, expiresAt, bid, image, id }) {
             />
           </div>
         )}
-        <div>{contents}</div>
+        <br />
         <div>
-          <p>Current bid: {bid}</p>
-        </div>
-        <em>
+          <p>{contents}</p>
           <br />
-          Posted by <User id={author} />
-          <p>Bidding ends at: {formatDate(expiresAt)}</p>
-        </em>
-        <div>
-          <Link to={`/item/${id}`}>View Item</Link>
+          <p>Current bid: {bid}</p>
+          <em>
+            <br />
+            Posted by <User id={author} />
+            <p>Bidding ends at: {formatDate(expiresAt)}</p>
+          </em>
         </div>
+        <br />
+        <button onClick={() => window.location.href = `/item/${id}`} className='details-btn'> View Details </button>
+
       </div>
     </article>
   )
