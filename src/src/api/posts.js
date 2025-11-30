@@ -15,6 +15,17 @@ export const getPosts = async (queryParams) => {
   }
 }
 
+export const getPostByNumericId = async (numericId) => {
+  try {
+    const posts = await getPosts({})
+    const post = posts.find((p) => p.id === parseInt(numericId))
+    return post ? [post] : []
+  } catch (err) {
+    console.error('error fetching post by id: ', err)
+    return []
+  }
+}
+
 export const createPost = async (token, formData) => {
   //pretty similar to what it was before, but now it made for multer
   try {

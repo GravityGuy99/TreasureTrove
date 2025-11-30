@@ -26,3 +26,23 @@ export const getUserInfo = async (id) => {
     })
     return await res.json()
 }
+
+export const addTokens = async (amount, token) => {
+    if (!token) {
+        throw new Error('not authenticated')
+    }
+
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}user/tokens`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : ''
+        },
+        body: JSON.stringify({ amount })
+    })
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error || 'failed to add tokens')
+    }
+    return await res.json()
+}

@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { User } from './User.jsx'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
 import { placeBid } from '../api/posts.js'
 import { useAuth } from '../contexts/AuthContext.jsx'
+import { useState, useEffect } from 'react'
 
 export function Post({
   title,
@@ -19,15 +18,40 @@ export function Post({
   const [token] = useAuth()
   const [bidAmount, setBidAmount] = useState('')
   const queryClient = useQueryClient()
+const [timeLeft, setTimeLeft] = useState('')
 
-  //I got this code from ChatGPT, but I can explain how it works
-  //it takes the createdAt data that we created previously and converts it into time that is easy to read by humans
-  //using 'short' for dateStyle makes it display the day like mm/dd/yyyy  instead of month dd yyyy
-  //using 'short' for timeStyle makes it display the time of day hr:min instead of hr:min:sec
-  function formatDate(dateString) {
-    const date = new Date(dateString)
-    return date.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })
-  }
+   // Calculate and update the countdown every second
+  useEffect(() => {
+    function updateCountdown() {
+      //gets the current time and the value of expiresAt and takes the difference
+      const now = new Date().getTime()
+      const end = new Date(expiresAt).getTime()
+      const diff = end - now
+
+      if (diff <= 0) {
+        setTimeLeft('Expired')
+        return
+      }
+      //converts the difference into an easier to read format (days, hours, minutes, seconds as opposed to just milliseconds)
+      const seconds = Math.floor((diff / 1000) % 60)
+      const minutes = Math.floor((diff / 1000 / 60) % 60)
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      if(days > 0){
+        setTimeLeft(`${days}d`)
+      } else if(hours>0) {
+        setTimeLeft(`${hours}h ${minutes}m`)
+      } else {
+        setTimeLeft(`${minutes}m ${seconds}s`)
+      }
+      
+    }
+    //This will call the function once per second. 
+    updateCountdown()
+    const timer = setInterval(updateCountdown, 1000)
+
+    return () => clearInterval(timer)
+  }, [expiresAt])
   const currentBid =
     bids.length > 0
       ? Math.max(...bids.map((b) => Number(b.amount)))
@@ -55,7 +79,7 @@ export function Post({
     }
     placeBidMutation.mutate()
   }
-
+  
   return (
     <article>
       <div className='listing-card'>
@@ -69,17 +93,16 @@ export function Post({
             />
           </div>
         )}
-        <div>{contents}</div>
+        <br />
         <div>
-          <p>Current bid: {currentBid}</p>
-        </div>
-        <em>
+          <p>{contents}</p>
           <br />
-          Posted by <User id={author} />
-          <p>Bidding ends at: {formatDate(expiresAt)}</p>
-        </em>
-        <div>
-          <Link to={`/item/${id}`}>View Item</Link>
+          <p>Current bid: {bid}</p>
+          <em>
+            <br />
+            Posted by <User id={author} />
+            <p>Time remaining: {timeLeft}</p>
+          </em>
         </div>
 
         {token && (
@@ -107,6 +130,9 @@ export function Post({
             </div>
           </form>
         )}
+        <br />
+        <button onClick={() => window.location.href = `/item/${id}`} className='details-btn'> View Details </button>
+
       </div>
     </article>
   )
