@@ -10,8 +10,9 @@ export function LoginCheck() {
     return( 
         //tells the user that they can now go to the create post page
         //includes a link to said page
-        <div>
-            <button onClick={() => window.location.href = `/createpost`} style={{ marginLeft: '12px' }}> List Item </button>
+        <div >
+            <button className="header-btn" onClick={() => window.location.href = `/createpost`} style={{ marginLeft: '12px' }}> List Item </button>
+            <br />
             <br />
             <hr />
             <br />
