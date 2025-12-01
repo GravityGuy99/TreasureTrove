@@ -30,7 +30,7 @@ export async function getUserInfoById(userId) {
     try{
         const user = await User.findById(userId)
         if (!user) return {username: userId}
-        return {username: user.username, tokens: user.tokens ?? 0}
+        return {username: user.username, tokens: user.tokens ?? 0, reservedTokens: user.reservedTokens ?? 0}
     } catch (err) {
         return {username: userId}
     }
@@ -47,4 +47,52 @@ export async function addTokens(userId) {
     )
     if (!user) throw new Error('user not found')
     return user.tokens
+}
+
+export async function deductTokens(userId, amount) {
+    const ded = Number(amount)
+    if (Number.isNaN(ded) || ded <= 0) throw new Error('invalid amount')
+    const user = await User.findById(userId)
+    if (!user) throw new Error('user not found')
+    if ((user.tokens ?? 0) < ded) throw new Error('insufficient tokens')
+    user.tokens = (user.tokens ?? 0) - ded
+    await user.save()
+    return user.tokens
+}
+
+export async function reserveTokens(userId, amount) {
+    const amt = Number(amount)
+    if (Number.isNaN(amt) || amt <= 0) throw new Error('invalid amount')
+    const user = await User.findOneAndUpdate(
+        { _id: userId, tokens: { $gte: amt } },
+        { $inc: { tokens: -amt, reservedTokens: amt } },
+        { new: true }
+    )
+    if (!user) throw new Error('insufficient tokens to reserve')
+    return { tokens: user.tokens, reservedTokens: user.reservedTokens }
+}
+
+export async function releaseReservedTokens(userId, amount) {
+    const amt = Number(amount)
+    if (Number.isNaN(amt) || amt <= 0) throw new Error('invalid amount')
+    const user = await User.findOneAndUpdate(
+        { _id: userId, reservedTokens: { $gte: amt } },
+        { $inc: { tokens: amt, reservedTokens: -amt } },
+        { new: true }
+    )
+    if (!user) throw new Error('not enough reserved tokens to release')
+    return { tokens: user.tokens, reservedTokens: user.reservedTokens }
+}
+
+export async function finalizeReservedTokens(userId, amount) {
+    // Finalize reservation when user wins: reduce reservedTokens (tokens already removed from available)
+    const amt = Number(amount)
+    if (Number.isNaN(amt) || amt <= 0) throw new Error('invalid amount')
+    const user = await User.findOneAndUpdate(
+        { _id: userId, reservedTokens: { $gte: amt } },
+        { $inc: { reservedTokens: -amt } },
+        { new: true }
+    )
+    if (!user) throw new Error('insufficient reserved tokens to finalize')
+    return { reservedTokens: user.reservedTokens }
 }
