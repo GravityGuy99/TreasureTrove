@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import { useUser } from '../components/GetUser.jsx'
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom"
+import { addTokens } from '../api/users.js'
 
 export function UserPage() {
   const [sortBy, setSortBy] = useState('createdAt')
@@ -40,7 +40,7 @@ export function UserPage() {
 
   const userInfo = userInfoQuery.data ?? { username: '', tokens: 0 }
 
-  const username = userQuery.data?.username
+  const username = userInfoQuery.data?.username
 
   // Then query posts by username
   const postsQuery = useQuery({
