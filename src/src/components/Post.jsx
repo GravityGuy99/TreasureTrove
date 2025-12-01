@@ -97,7 +97,7 @@ const [timeLeft, setTimeLeft] = useState('')
         <div>
           <p>{contents}</p>
           <br />
-          <p>Current bid: {bid}</p>
+          <p>Current bid: {currentBid}</p>
           <em>
             <br />
             Posted by <User id={author} />
