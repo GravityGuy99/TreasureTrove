@@ -17,8 +17,14 @@ export const getPosts = async (queryParams) => {
 
 export const getPostByNumericId = async (numericId) => {
   try {
-    const posts = await getPosts({})
-    const post = posts.find((p) => p.id === parseInt(numericId))
+    // Fetch the URL of the post instead of the entire list
+    const url = new URL(`posts/${numericId}`, import.meta.env.VITE_BACKEND_URL)
+    const res = await fetch(url.toString())
+    if (!res.ok) {
+      return []
+    }
+    const post = await res.json()
+    // Keep compatibility with the frontend which expects an array (previously returned [post])
     return post ? [post] : []
   } catch (err) {
     console.error('error fetching post by id: ', err)
