@@ -7,6 +7,7 @@ import {
   updatePost,
   deletePost,
   placeBid,
+  resolveExpiredPosts,
 } from '../services/post.js'
 import { requireAuth } from '../middleware/jwt.js'
 import { upload } from '../middleware/upload.js'
@@ -102,6 +103,16 @@ export function postsRoutes(app) {
     } catch (err) {
       console.error('error placing bid, ', err)
       return res.status(400).json({ error: err.message })
+    }
+  })
+  // Resolve expired posts (determine winners and deduct tokens)
+  app.post('/api/v1/posts/resolve', requireAuth, async (req, res) => {
+    try {
+      const results = await resolveExpiredPosts()
+      return res.json(results)
+    } catch (err) {
+      console.error('error resolving posts: ', err)
+      return res.status(500).json({ error: err.message })
     }
   })
 }

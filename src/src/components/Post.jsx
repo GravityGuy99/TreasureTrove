@@ -14,6 +14,9 @@ export function Post({
   image,
   id,
   bids = [],
+  closed = false,
+  winner = null,
+  finalPrice = null,
 }) {
   const [token] = useAuth()
   const [bidAmount, setBidAmount] = useState('')
@@ -53,7 +56,10 @@ const [timeLeft, setTimeLeft] = useState('')
     return () => clearInterval(timer)
   }, [expiresAt])
   const currentBid =
-    bids.length > 0
+    // If auction already resolved, show finalPrice as current
+    closed && finalPrice != null
+      ? Number(finalPrice)
+      : bids.length > 0
       ? Math.max(...bids.map((b) => Number(b.amount)))
       : Number(bid || 0)
 
@@ -105,30 +111,44 @@ const [timeLeft, setTimeLeft] = useState('')
           </em>
         </div>
 
-        {token && (
-          <form onSubmit={handleBidSubmit} className='bid-form'>
-            <div>
-              <label htmlFor={`bid-amount-${id}`}>
-                <h4>Place Your Bid</h4>
-              </label>
-              <input
-                type='number'
-                id={`bid-amount-${id}`}
-                min={currentBid + 1}
-                step='1'
-                value={bidAmount}
-                onChange={(e) => setBidAmount(e.target.value)}
-                placeholder={`Minimum: ${currentBid + 1}`}
-                required
-              />
-              <button
-                type='submit'
-                disabled={!bidAmount || placeBidMutation.isPending}
-              >
-                {placeBidMutation.isPending ? 'Placing Bid...' : 'Place Bid'}
-              </button>
-            </div>
-          </form>
+        {closed ? (
+          <div style={{ marginTop: '12px' }}>
+            <strong>Auction closed</strong>
+            {winner ? (
+              <div>
+                Winner: <User id={winner} />
+                <div>Final price: {finalPrice}</div>
+              </div>
+            ) : (
+              <div>No winning bidder (unsold)</div>
+            )}
+          </div>
+        ) : (
+          token && (
+            <form onSubmit={handleBidSubmit} className='bid-form'>
+              <div>
+                <label htmlFor={`bid-amount-${id}`}>
+                  <h4>Place Your Bid</h4>
+                </label>
+                <input
+                  type='number'
+                  id={`bid-amount-${id}`}
+                  min={currentBid + 1}
+                  step='1'
+                  value={bidAmount}
+                  onChange={(e) => setBidAmount(e.target.value)}
+                  placeholder={`Minimum: ${currentBid + 1}`}
+                  required
+                />
+                <button
+                  type='submit'
+                  disabled={!bidAmount || placeBidMutation.isPending}
+                >
+                  {placeBidMutation.isPending ? 'Placing Bid...' : 'Place Bid'}
+                </button>
+              </div>
+            </form>
+          )
         )}
         <br />
         <button onClick={() => window.location.href = `/item/${id}`} className='details-btn'> View Details </button>
@@ -153,4 +173,7 @@ Post.propTypes = {
       timestamp: PropTypes.string.isRequired,
     }),
   ),
+  closed: PropTypes.bool,
+  winner: PropTypes.string,
+  finalPrice: PropTypes.number,
 }

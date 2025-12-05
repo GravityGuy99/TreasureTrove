@@ -21,6 +21,11 @@ const postSchema = new Schema(
   { timestamps: true },
 )
 
-postSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 })
+// Track whether a post has been closed (auction resolved), the winning user, and final price
+postSchema.add({
+  closed: { type: Boolean, default: false },
+  winner: { type: Schema.Types.ObjectId, ref: 'user' },
+  finalPrice: { type: Number },
+})
 
 export const Post = mongoose.model('post', postSchema)
